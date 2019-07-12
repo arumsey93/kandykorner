@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class EmployeeList extends Component {
+export default class LocationList extends Component {
     render() {
         return (
             <section className="locations">
