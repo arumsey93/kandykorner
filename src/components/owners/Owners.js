@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./Owner.css"
 
 export default class OwnersList extends Component {
     render() {
@@ -6,11 +7,17 @@ export default class OwnersList extends Component {
             <section className="owners">
             {
                 this.props.owners.map(obj =>
-                    // console.log(employee)
-                    <div key={obj.id}>
-                        {obj.name}
-                        <br></br>
-                        {obj.phoneNumber}
+                    <div key={obj.id} className="card">
+                        <div className="card-body">
+                            <div className="card-title">
+                                {obj.name}
+                                <br></br>
+                                {obj.phoneNumber}
+                                <button
+                                    onClick={() => this.props.deleteOwner(obj.id)}
+                                    className="card-link">Delete</button>
+                            </div>
+                        </div>
                     </div>
                 )
             }
