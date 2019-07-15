@@ -15,7 +15,6 @@ export default class ApplicationViews extends Component {
         locations: [],
         animals: [],
         owners: [],
-        search: []
     }
 
     componentDidMount() {
@@ -72,7 +71,7 @@ export default class ApplicationViews extends Component {
                     return <OwnersList owners={this.state.owners} deleteOwner={this.deleteOwner} />
                 }} />
                 <Route path="/search" render={(props) => {
-                    return <SearchResults search={this.state.search} locations={this.state.locations} animals={this.state.animals} owners={this.state.owners} employees={this.state.employees} />
+                    return <SearchResults searchResults={this.props.searchResults} />
                 }} />
             </Fragment>
         )
