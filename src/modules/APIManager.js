@@ -14,5 +14,20 @@ const remoteURL = "http://localhost:5002"
             .then(e => e.json())
             .then(() => fetch(`http://localhost:5002/${resource }`))
             .then(e => e.json())
+        },
+        delete(id) {
+          return fetch(`http://localhost:5002/animals/${id}`, {
+            method: "DELETE"
+          })
+          .then(e => e.json())
+        },
+        post(resource, newThing) {
+          return fetch(`${remoteURL}/${resource}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newThing)
+          }).then(data => data.json())
         }
       }

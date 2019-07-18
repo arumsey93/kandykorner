@@ -1,16 +1,6 @@
-.employees {
+.locations {
     display: flex;
     justify-content: space-evenly;
-}
-
-.employee {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.good-employee {
-    width: 40px;
-    height: 40px;
 }
 
 .card {
@@ -28,8 +18,3 @@
     margin: 12px 0 0 0;
     font-size: 0.7em;
 }
-.employeeButton {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 0 0 10px 0;
-  }
