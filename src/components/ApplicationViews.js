@@ -156,6 +156,7 @@ class ApplicationViews extends Component {
                 <Route exact path="/employees" render={(props) => {
                      if (this.isAuthenticated()) {
                         return <EmployeeList {...props}
+                        animals={this.state.animals}
                         employees={this.state.employees} 
                         deleteEmployee={this.deleteEmployee}/>
                      } else {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import dog from "./DogIcon.svg"
-import { Link } from 'react-router-dom'
 import "./Animal.css"
+import AnimalCard from "./AnimalCard"
 
 
 export default class Animals extends Component {
@@ -21,20 +20,7 @@ export default class Animals extends Component {
             <section className="animals">
             {
                 this.props.animals.map(animal =>
-                    <div key={animal.id} className="card">
-                        <div className="card-body">
-                            <div className="card-title">
-                                <img src={dog} className="icon--dog" />
-                                <h5>{animal.name}</h5>
-                                <h6>{this.props.owners.find(owner => owner.id === animal.ownerId).name}</h6>
-                                {/* <h6>{this.props.employees.find(employee => employee.id === animal.ownerId).name}</h6> */}
-                                <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
-                                <button
-                                    onClick={() => this.props.deleteAnimal(animal.id)}
-                                    className="card-link">Delete</button>
-                            </div>
-                        </div>
-                    </div>
+                    <AnimalCard key={animal.id} animal={animal} {...this.props} />
                 )
             }
             </section>
