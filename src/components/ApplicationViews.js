@@ -14,6 +14,7 @@ import APIManager from '../modules/APIManager'
 import Login from './authentication/Login'
 import AnimalForm from './animals/AnimalForm'
 import OwnerForm from './owners/OwnerForm'
+import AnimalEditForm from './animals/AnimalEditForm'
 
 
 class ApplicationViews extends Component {
@@ -104,6 +105,16 @@ class ApplicationViews extends Component {
             })
         );
 
+    updateAnimal = (editedAnimalObject) => {
+        return APIManager.put(editedAnimalObject)
+        .then(() => APIManager.getAll("animals"))
+        .then(animals => {
+            this.setState({
+            animals: animals
+            })
+        });
+        };
+
     render() {
         return (
             <Fragment>
@@ -136,17 +147,22 @@ class ApplicationViews extends Component {
                         return <Redirect to="/login" />
                     }
                 }} />
-                <Route path="/animals/:animalId(\d+)" render={(props) => {
+                <Route exact path="/animals/:animalId(\d+)" render={(props) => {
                     let animal = this.state.animals.find(animal =>
                         animal.id === parseInt(props.match.params.animalId)
                     )
                     if (!animal) {
                         animal = {id:404, name:"404", breed: "Dog not found"}
                     }
-                    return <AnimalDetail
+                    return <AnimalDetail {...props}
                     animal={ animal } 
                     dischargeAnimal={ this.deleteAnimal } />
                 }} />
+                <Route path="/animals/:animalId(\d+)/edit" render={props => {
+                    return <AnimalEditForm {...props} 
+                    employees={this.state.employees} 
+                    updateAnimal={this.updateAnimal}/>
+                    }} />
                 <Route path="/animals/new" render={(props) => {
                     return <AnimalForm {...props}
                        addAnimal={this.addAnimal}
