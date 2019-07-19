@@ -35,7 +35,7 @@ export default class AnimalEditForm extends Component {
   }
 
     componentDidMount() {
-      APIManager.get(this.props.match.params.animalId)
+      APIManager.get("animals", this.props.match.params.animalId)
       .then(animal => {
         this.setState({
           animalName: animal.name,

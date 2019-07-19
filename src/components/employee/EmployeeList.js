@@ -3,6 +3,7 @@ import employees from "./good-employee.svg"
 import { Link } from 'react-router-dom'
 import "./Employee.css"
 import AnimalCard from "../animals/AnimalCard"
+import LocationCard from '../locationlist/LocationCard'
 
 export default class EmployeeList extends Component {
     render() {
@@ -26,12 +27,19 @@ export default class EmployeeList extends Component {
                                 <img src={employees} className="good-employee" />
                                 <br></br>
                                 <h6>{employee.name}</h6>
+                                <div className="employee-location">
+                                    {
+                                        this.props.location.filter(loc => loc.id === employee.locationId)
+                                        .map(loc => <LocationCard key={loc.id} tyler={loc} {...this.props} />
+                                            )
+                                    }
+                                </div>
                                 <Link className="nav-link" to={`/employees/${employee.id}`}>Details</Link>
                                 <button
                                     onClick={() => this.props.deleteEmployee(employee.id)}
                                     className="card-link">Fire!</button>
                             </div>
-                            <h6 class="card-subtitle mb-2 text-muted">Caretaker For</h6>
+                            <h6 className="card-subtitle mb-2 text-muted">Caretaker For</h6>
                             <div className="animals--caretaker">
                             {
                                 this.props.animals

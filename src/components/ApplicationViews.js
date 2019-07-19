@@ -106,7 +106,7 @@ class ApplicationViews extends Component {
         );
 
     updateAnimal = (editedAnimalObject) => {
-        return APIManager.put(editedAnimalObject)
+        return APIManager.put("animals", editedAnimalObject)
         .then(() => APIManager.getAll("animals"))
         .then(animals => {
             this.setState({
@@ -121,7 +121,7 @@ class ApplicationViews extends Component {
                 <Route path="/login" component={Login} />
                 <Route exact path="/" render={(props) => {
                     if (this.isAuthenticated()) {
-                        return <LocationList 
+                        return <LocationList {...props}
                         locations={this.state.locations} />
                     } else {
                         return <Redirect to="/login" />
@@ -132,9 +132,11 @@ class ApplicationViews extends Component {
                         location.id === parseInt(props.match.params.locationId)
                     )
                     if (!location) {
-                        location = {id:404, name:"404", breed: "Location not found"}
+                        location = {id:404, name:"404"}
                     }
-                    return <LocationDetail location={ location } removeLocation={ this.deleteLocation } />
+                    return <LocationDetail {...props} 
+                    location={ location } 
+                    removeLocation={ this.deleteLocation } />
                 }} />
                 <Route exact path="/animals" render={(props) => {
                     if (this.isAuthenticated()) {
@@ -174,6 +176,7 @@ class ApplicationViews extends Component {
                         return <EmployeeList {...props}
                         animals={this.state.animals}
                         employees={this.state.employees} 
+                        location={this.state.locations}
                         deleteEmployee={this.deleteEmployee}/>
                      } else {
                         return <Redirect to="/login" />
